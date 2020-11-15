@@ -52,10 +52,13 @@ RUN echo 'Install CDK CLI' && \
 
 # Install AWS Azure Login
 RUN echo 'Install AWS Azure Login' && \
-    yum install -y ipa-gothic-fonts xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-utils xorg-x11-fonts-cyrillic xorg-x11-fonts-Type1 xorg-x11-fonts-misc && \
+    yum install -y alsa-lib atk cups-libs gtk3 libXcomposite libXcursor libXdamage libXext libXi libXrandr libXtst pango ipa-gothic-fonts xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-utils xorg-x11-fonts-cyrillic xorg-x11-fonts-Type1 xorg-x11-fonts-misc && \
+    yum update nss -y && \
     source ~/.bashrc && \
-    /bin/bash -c "npm install -g aws-azure-login" && \
+    /bin/bash -c "npm install -g aws-azure-login --unsafe-perm=true --allow-root" && \
     yum clean all && \
     rm -rf /var/cache/yum
+
+# cfn-lint
 
 ENTRYPOINT [ "bash", "-c" ]
